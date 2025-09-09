@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monkey Food - Promoción Nueva Tienda Badajoz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container-fluid p-0">
+    <!-- Header -->
+    <header class="bg-dark text-white py-2 mb-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <div class="text-center">
+              <img src="images/monkey-food-logo-new.svg" alt="Monkey Food Logo" style="height: 120px; width: auto; filter: drop-shadow(0 0 10px rgba(212,175,55,0.5));">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <!-- Tarjeta de bienvenida -->
+          <div class="card shadow mb-4" id="welcome-card">
+            <div class="card-header bg-primary text-white text-center">
+              <h2 class="mb-0">¡PROMOCIÓN ESPECIAL DE APERTURA EN BADAJOZ!</h2>
+            </div>
+            <div class="card-body text-center">
+              <div class="mb-4">
+                <img src="images/prize-icons.png" alt="Premios disponibles" class="img-fluid" style="max-width: 100%;">
+              </div>
+              <h3 class="card-title" style="color: #ff6b00;">¡Bienvenido a la nueva era!</h3>
+              <p class="card-text">Estamos celebrando la apertura de nuestra nueva tienda en <strong>Badajoz</strong> con increíbles premios.</p>
+              <p class="card-text">Completa el formulario y descubre al instante si has ganado uno de nuestros fantásticos premios.</p>
+              <div class="mt-4">
+                <button class="btn btn-primary btn-lg" id="start-btn">
+                  <i class="fas fa-gift me-2"></i>¡Quiero Participar!
+                </button>
+              </div>
+              <div class="mt-3 text-muted small">
+                <p>Promoción válida hasta agotar existencias. Un intento por dispositivo.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulario de registro (inicialmente oculto) -->
+          <div class="card shadow mb-4 d-none" id="registration-form-card">
+            <div class="card-header bg-primary text-white text-center">
+              <h3 class="mb-0"><i class="fas fa-user-plus me-2"></i>Formulario de Participación</h3>
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-4">
+                <p>Completa tus datos para participar en nuestra promoción y descubrir al instante si has ganado.</p>
+              </div>
+              <form id="participant-form">
+                <div class="mb-3">
+                  <label for="name" class="form-label"><i class="fas fa-user me-2"></i>Nombre completo</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Escribe tu nombre completo" required>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label"><i class="fas fa-envelope me-2"></i>Correo electrónico</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                </div>
+
+                <div class="form-check mb-4 border-top pt-3">
+                  <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                  <label class="form-check-label" for="terms">
+                    Acepto los <a href="terms.html" target="_blank" class="text-decoration-none">términos y condiciones</a> y la política de privacidad
+                  </label>
+                </div>
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-dice me-2"></i>¡Probar Suerte!
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" id="back-btn">
+                    <i class="fas fa-arrow-left me-2"></i>Volver
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Tarjeta de resultado (inicialmente oculta) -->
+          <div class="card shadow mb-4 d-none" id="result-card">
+            <div id="winner-content" class="d-none">
+              <div class="card-header bg-success text-white text-center">
+                <h2 class="mb-0"><i class="fas fa-trophy me-2"></i>¡FELICIDADES!</h2>
+              </div>
+              <div class="card-body text-center">
+                <div class="confetti-animation mb-3">
+                  <i class="fas fa-trophy text-warning prize-icon mb-3" style="font-size: 6rem;"></i>
+                </div>
+                <h3 class="card-title" style="color: #ff6b00;">¡Has ganado un premio!</h3>
+                <div class="prize-info my-4 p-3 border border-success rounded bg-light">
+                  <h3 class="prize-name mb-2"></h3>
+                  <p class="prize-description mb-0"></p>
+                </div>
+                <div class="alert alert-warning">
+                  <p class="mb-1"><strong>Presenta este código en nuestra tienda para reclamar tu premio:</strong></p>
+                  <div class="prize-code my-2 p-3 bg-white rounded shadow-sm" style="letter-spacing: 3px;"></div>
+                  <p class="small mb-0">Válido hasta 30 días después de la fecha de participación</p>
+                </div>
+                <div class="mt-4 border-top pt-3">
+                  <p class="card-text">¡Gracias por participar!</p>
+                  <p class="card-text">Te esperamos en nuestra nueva tienda en <strong>Badajoz</strong>.</p>
+                  <p class="card-text"><strong>Dirección:</strong> Av. Principal, 123, Badajoz</p>
+                  <button class="btn btn-outline-primary mt-2" id="restart-btn">
+                    <i class="fas fa-home me-2"></i>Volver al inicio
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div id="no-prize-content" class="d-none">
+              <div class="card-header bg-secondary text-white text-center">
+                <h2 class="mb-0"><i class="fas fa-info-circle me-2"></i>RESULTADO</h2>
+              </div>
+              <div class="card-body text-center">
+                <i class="fas fa-cookie-bite text-secondary prize-icon mb-3" style="font-size: 6rem;"></i>
+                <h3 class="card-title">¡Lo sentimos!</h3>
+                <p class="card-text">No has ganado ningún premio en esta ocasión.</p>
+                <div class="alert alert-info my-4">
+                  <p class="mb-0">Pero te invitamos a visitar nuestra nueva tienda en <strong>Badajoz</strong> y disfrutar de nuestros deliciosos productos.</p>
+                </div>
+                <div class="mt-4 border-top pt-3">
+                  <p class="card-text">¡Gracias por participar!</p>
+                  <p class="card-text"><strong>Dirección:</strong> Av. Principal, 123, Badajoz</p>
+                  <p class="card-text"><strong>Horario:</strong> Lunes a Domingo de 12:00 a 23:00</p>
+                  <button class="btn btn-outline-primary mt-2" id="restart-btn-no-prize">
+                    <i class="fas fa-home me-2"></i>Volver al inicio
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta de error (inicialmente oculta) -->
+          <div class="card shadow mb-4 d-none" id="error-card">
+            <div class="card-header bg-danger text-white text-center">
+              <h2 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>ERROR</h2>
+            </div>
+            <div class="card-body text-center">
+              <i class="fas fa-exclamation-triangle text-danger prize-icon mb-3" style="font-size: 5rem;"></i>
+              <h2 class="card-title">¡Ups! Ha ocurrido un error</h2>
+              <p class="card-text error-message"></p>
+              <div class="alert alert-danger my-3">
+                <p class="mb-0">Por favor, intenta nuevamente o visita nuestra tienda directamente.</p>
+              </div>
+              <div class="mt-4 border-top pt-3">
+                <p class="card-text">Si el problema persiste, puedes contactarnos en:</p>
+                <p class="card-text"><strong>Email:</strong> soporte@monkeyfood.es</p>
+                <button class="btn btn-outline-primary mt-2" id="restart-btn-error">
+                  <i class="fas fa-home me-2"></i>Volver al inicio
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta de dispositivo ya registrado (inicialmente oculta) -->
+          <div class="card shadow mb-4 d-none" id="already-participated-card">
+            <div class="card-header bg-info text-white text-center">
+              <h2 class="mb-0"><i class="fas fa-info-circle me-2"></i>INFORMACIÓN</h2>
+            </div>
+            <div class="card-body text-center">
+              <i class="fas fa-user-check text-info prize-icon mb-3" style="font-size: 5rem;"></i>
+              <h2 class="card-title">Ya has participado</h2>
+              <div class="alert alert-info my-3">
+                <p class="mb-0">Este dispositivo ya ha sido registrado en nuestra promoción. Recuerda que solo se permite una participación por dispositivo.</p>
+              </div>
+              <div class="mt-4 border-top pt-3">
+                <p class="card-text">¡Gracias por tu interés en Monkey Food!</p>
+                <p class="card-text">Te esperamos en nuestra nueva tienda en <strong>Badajoz</strong>.</p>
+                <p class="card-text"><strong>Dirección:</strong> Av. Principal, 123, Badajoz</p>
+                <p class="card-text"><strong>Horario:</strong> Lunes a Domingo de 12:00 a 23:00</p>
+                <button class="btn btn-outline-primary mt-2" id="restart-btn-already">
+                  <i class="fas fa-home me-2"></i>Volver al inicio
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5><i class="fas fa-store me-2"></i>Monkey Food Badajoz</h5>
+            <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i>AV. SINFORIANO MADROÑERO, 21</p>
+            <p class="mb-1"><i class="fas fa-phone me-2"></i>642 74 29 98</p>
+          </div>
+          <div class="col-md-4 text-center d-none d-md-block">
+            <img src="images/monkey-food-logo-new.svg" alt="Monkey Food Logo" style="height: 80px; filter: drop-shadow(0 0 8px rgba(212,175,55,0.4));">
+            <p class="mt-2">COMIDA DIVERTIDA PÁ BUENA GENTE</p>
+          </div>
+          <div class="col-md-4 text-md-end">
+            <p>© 2025 Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="js/confetti.js"></script>
+  <script src="js/device-id.js"></script>
+  <script src="js/csrf-protection.js"></script>
+  <script src="js/form-validation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

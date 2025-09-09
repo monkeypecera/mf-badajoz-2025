@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administración - Monkey Food Competición</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .admin-title {
+      color: #ff6b00;
+      font-size: 28px;
+    }
+    
+    .admin-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .admin-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .admin-card h2 {
+      color: #ff6b00;
+      margin-top: 0;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .stat-card {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .stat-card h3 {
+      margin-top: 0;
+      color: #333;
+      font-size: 18px;
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff6b00;
+      margin: 10px 0;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .prize-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    .prize-table th, .prize-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .prize-table th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .prize-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .progress-bar {
+      height: 10px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: #ff6b00;
+      border-radius: 5px;
+    }
+    
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .btn-primary {
+      background-color: #ff6b00;
+      color: white;
+    }
+    
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+    
+    .btn-danger {
+      background-color: #dc3545;
+      color: white;
+    }
+    
+    .btn:hover {
+      opacity: 0.9;
+    }
+    
+    .participants-list {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+    
+    .error-message {
+      color: #dc3545;
+      padding: 10px;
+      background-color: #f8d7da;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+    
+    .success-message {
+      color: #28a745;
+      padding: 10px;
+      background-color: #d4edda;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid p-0">
+    <!-- Header -->
+    <header class="bg-dark text-white py-2 mb-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <div class="text-center">
+              <img src="images/monkey-food-logo-new.svg" alt="Monkey Food Logo" style="height: 120px; width: auto; filter: drop-shadow(0 0 10px rgba(212,175,55,0.5));">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1 class="admin-title">Panel de Administración</h1>
+      <div class="admin-actions">
+        <button id="refreshStats" class="btn btn-primary">Actualizar Datos</button>
+        <button id="resetPrizes" class="btn btn-danger">Restablecer Premios</button>
+      </div>
+    </div>
+    
+    <div id="messages"></div>
+    
+    <div class="admin-card">
+      <h2>Resumen de la Competición</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Total de Premios</h3>
+          <div id="totalPrizes" class="stat-value">-</div>
+          <div class="stat-label">Premios configurados</div>
+        </div>
+        <div class="stat-card">
+          <h3>Premios Distribuidos</h3>
+          <div id="distributedPrizes" class="stat-value">-</div>
+          <div class="stat-label">Premios entregados</div>
+        </div>
+        <div class="stat-card">
+          <h3>Premios Restantes</h3>
+          <div id="remainingPrizes" class="stat-value">-</div>
+          <div class="stat-label">Disponibles para ganar</div>
+        </div>
+        <div class="stat-card">
+          <h3>Porcentaje Distribuido</h3>
+          <div id="distributionPercentage" class="stat-value">-</div>
+          <div class="stat-label">Del total de premios</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="admin-card">
+      <h2>Detalle de Premios</h2>
+      <table class="prize-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Cantidad Inicial</th>
+            <th>Restantes</th>
+            <th>Distribuidos</th>
+            <th>Probabilidad</th>
+            <th>Distribución</th>
+          </tr>
+        </thead>
+        <tbody id="prizeTableBody">
+          <tr>
+            <td colspan="6" class="loading">Cargando datos...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="admin-card">
+      <h2>Participantes Registrados</h2>
+      <div id="participantsContainer" class="participants-list">
+        <p class="loading">Cargando participantes...</p>
+      </div>
+    </div>
+  </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5><i class="fas fa-store me-2"></i>Monkey Food Badajoz</h5>
+            <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i>AV. SINFORIANO MADROÑERO, 21</p>
+            <p class="mb-1"><i class="fas fa-phone me-2"></i>642 74 29 98</p>
+          </div>
+          <div class="col-md-4 text-center d-none d-md-block">
+            <img src="images/monkey-food-logo-new.svg" alt="Monkey Food Logo" style="height: 80px; filter: drop-shadow(0 0 8px rgba(212,175,55,0.4));">
+            <p class="mt-2">COMIDA DIVERTIDA PÁ BUENA GENTE</p>
+          </div>
+          <div class="col-md-4 text-md-end">
+            <p>© 2025 Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

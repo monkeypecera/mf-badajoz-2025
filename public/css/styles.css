@@ -1,0 +1,682 @@
+/* Google Fonts - Oswald */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+/* Variables de color - Monkey Food Exact Match */
+:root {
+  --primary-color: #D4AF37; /* Dorado exacto del logo */
+  --secondary-color: #000000; /* Negro profundo */
+  --accent-color: #1a1a1a; /* Gris muy oscuro */
+  --jungle-green: #2d5016; /* Verde oscuro natural */
+  --leaf-green: #4a7c59; /* Verde hoja natural */
+  --text-light: #ffffff;
+  --text-dark: #000000;
+  --background-dark: #0a0a0a;
+  --card-bg: rgba(0, 0, 0, 0.95);
+  --text-color: #ffffff;
+  --gold-glow: rgba(212, 175, 55, 0.3);
+}
+
+/* Estilos generales - Monkey Food Jungle branding */
+body {
+  font-family: 'Oswald', sans-serif;
+  background: #000000;
+  color: #f7ba26;
+  min-height: 100vh;
+  position: relative;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    url('../images/background-jungle.png'),
+    radial-gradient(circle at 20% 80%, var(--gold-glow) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(74, 124, 89, 0.1) 0%, transparent 50%);
+  background-size: cover, 100% 100%, 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Decorative monstera leaves */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    url('../images/monstera-leaf-1.png'),
+    url('../images/monstera-leaf-2.png');
+  background-size: 200px auto, 150px auto;
+  background-position: 
+    top 10% left 5%,
+    bottom 15% right 8%;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Additional leaf decorations for larger screens */
+@media (min-width: 768px) {
+  body::after {
+    background-image: 
+      url('../images/monstera-leaf-1.png'),
+      url('../images/monstera-leaf-2.png'),
+      url('../images/monstera-leaf-1.png');
+    background-size: 250px auto, 180px auto, 120px auto;
+    background-position: 
+      top 10% left 5%,
+      bottom 15% right 8%,
+      top 60% right 15%;
+  }
+}
+
+/* Jungle leaf pattern overlay - additional */
+.jungle-overlay {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q30,10 40,20 Q30,30 20,20" fill="%23228B22" opacity="0.1"/><path d="M60,60 Q70,50 80,60 Q70,70 60,60" fill="%2332CD32" opacity="0.1"/></svg>');
+  background-size: 200px 200px;
+  animation: leafFloat 30s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes leafFloat {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-10px) translateX(5px); }
+  50% { transform: translateY(-5px) translateX(-3px); }
+  75% { transform: translateY(-15px) translateX(8px); }
+}
+
+/* Estilos del header - Monkey Food Exact */
+header {
+  background: #000000;
+  padding: 2rem 0;
+  position: relative;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold-glow), transparent);
+  opacity: 0.3;
+  animation: headerGlow 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes headerGlow {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+}
+
+header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 900;
+  font-size: 2.8rem;
+  color: #000000;
+  text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.5);
+  position: relative;
+  z-index: 2;
+}
+
+header .lead {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  color: #f7ba26;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 2;
+}
+
+/* Estilos de las tarjetas - Monkey Food Exact */
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid var(--primary-color);
+  background: #000000;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(212, 175, 55, 0.3);
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 13px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(212, 175, 55, 0.5);
+  border-color: #F4D03F;
+}
+
+.card-header {
+  font-family: 'Oswald', sans-serif;
+  padding: 1.5rem 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 50%, var(--secondary-color) 100%);
+  color: #000000;
+  border-bottom: 3px solid var(--primary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+  animation: jungleHeaderShine 4s ease-in-out infinite;
+}
+
+@keyframes jungleHeaderShine {
+  0%, 100% { transform: translateX(-100%) skewX(-25deg); }
+  50% { transform: translateX(100%) skewX(-25deg); }
+}
+
+/* Animaciones para las tarjetas */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animación de shake para errores de validación */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Estilos para validación de formularios - Monkey Food style */
+.form-control {
+  font-family: 'Oswald', sans-serif;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(247, 186, 38, 0.3);
+  border-radius: 15px;
+  color: #f7ba26;
+  padding: 1rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #ff6b00;
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 0, 0.25);
+  color: #ffffff;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-control.is-invalid {
+  border-color: #ff4757;
+  box-shadow: 0 0 0 0.2rem rgba(255, 71, 87, 0.25);
+  background-color: rgba(255, 71, 87, 0.1);
+}
+
+.form-control.is-valid {
+  border-color: #2ed573;
+  box-shadow: 0 0 0 0.2rem rgba(46, 213, 115, 0.25);
+  background-color: rgba(46, 213, 115, 0.1);
+}
+
+.invalid-feedback {
+  color: #ff6b87;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.form-label {
+  font-family: 'Oswald', sans-serif;
+  color: #000000;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+.card {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.card-body {
+  padding: 2.5rem;
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 20, 20, 0.9) 100%);
+  color: #ffffff;
+  position: relative;
+}
+
+.card-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 70%, rgba(255, 204, 0, 0.08) 0%, rgba(34, 139, 34, 0.05) 50%, transparent 80%);
+  pointer-events: none;
+}
+
+.card-body h3 {
+  font-family: 'Oswald', sans-serif;
+  color: #000000;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(212, 175, 55, 0.5);
+}
+
+.card-body p {
+  font-family: 'Oswald', sans-serif;
+  color: #f7ba26;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Estilos para los botones - Monkey Food Exact */
+.btn-primary {
+  font-family: 'Oswald', sans-serif;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #F4D03F 100%);
+  border: 2px solid var(--primary-color);
+  color: #000000;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 6px 15px rgba(212, 175, 55, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.4s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #F4D03F 0%, var(--primary-color) 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 20px rgba(212, 175, 55, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-color: #F4D03F;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+  font-family: 'Oswald', sans-serif;
+  color: var(--primary-color);
+  border: 3px solid var(--primary-color);
+  background: transparent;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  box-shadow: 
+    0 5px 15px rgba(255, 204, 0, 0.2),
+    inset 0 1px 0 rgba(255, 204, 0, 0.1);
+}
+
+.btn-outline-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--jungle-green) 50%, var(--accent-color) 100%);
+  transition: left 0.6s ease;
+  z-index: -1;
+}
+
+.btn-outline-primary:hover {
+  color: var(--secondary-color);
+  border-color: var(--leaf-green);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 15px 35px rgba(255, 204, 0, 0.4),
+    0 0 20px rgba(34, 139, 34, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline-primary:hover::before {
+  left: 0;
+}
+
+/* Estilos para los iconos de premios - Jungle Theme */
+.prize-icon {
+  font-size: 4.5rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  color: var(--primary-color);
+  text-shadow: 
+    0 0 20px rgba(255, 204, 0, 0.6),
+    0 0 40px rgba(255, 204, 0, 0.4);
+  animation: jungleBounce 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 5px 15px rgba(255, 204, 0, 0.3));
+}
+
+@keyframes jungleBounce {
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+    text-shadow: 
+      0 0 20px rgba(255, 204, 0, 0.6),
+      0 0 40px rgba(255, 204, 0, 0.4);
+  }
+  50% { 
+    transform: translateY(-15px) scale(1.1);
+    text-shadow: 
+      0 0 30px rgba(255, 204, 0, 0.8),
+      0 0 60px rgba(255, 204, 0, 0.6),
+      0 0 20px rgba(34, 139, 34, 0.4);
+  }
+}
+
+/* Estilos para el código del premio - Jungle Theme */
+.prize-code {
+  font-family: 'Nunito', monospace;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 5px;
+  color: var(--secondary-color);
+  text-shadow: 
+    0 0 15px rgba(255, 204, 0, 0.8),
+    0 0 30px rgba(255, 204, 0, 0.5);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--jungle-green) 50%, var(--accent-color) 100%);
+  border: 4px solid var(--primary-color);
+  padding: 1.8rem 2.5rem;
+  border-radius: 25px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  box-shadow: 
+    0 10px 30px rgba(255, 204, 0, 0.4),
+    0 0 20px rgba(34, 139, 34, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2);
+}
+
+.prize-code::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), rgba(34, 139, 34, 0.2), transparent);
+  animation: jungleShimmer 3s ease-in-out infinite;
+}
+
+@keyframes jungleShimmer {
+  0% { left: -100%; transform: skewX(-25deg); }
+  100% { left: 100%; transform: skewX(-25deg); }
+}
+
+/* Estilos para el nombre del premio - Jungle Theme */
+.prize-name {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-shadow: 
+    0 0 25px rgba(255, 204, 0, 0.6),
+    0 0 50px rgba(255, 204, 0, 0.4),
+    0 0 15px rgba(34, 139, 34, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(45deg, var(--primary-color), var(--leaf-green), var(--primary-color));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: jungleTextGlow 3s ease-in-out infinite;
+}
+
+@keyframes jungleTextGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Estilos para la descripción del premio - Jungle Theme */
+.prize-description {
+  font-size: 1.4rem;
+  color: var(--text-color);
+  font-weight: 600;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+  background: linear-gradient(135deg, rgba(255, 204, 0, 0.1) 0%, rgba(34, 139, 34, 0.05) 100%);
+  padding: 1rem 1.5rem;
+  border-radius: 15px;
+  border: 2px solid rgba(255, 204, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+/* Estilos del footer - Monkey Food Exact */
+footer {
+  background: #000000;
+  color: var(--text-color);
+  padding: 3rem 0 2rem;
+  margin-top: 4rem;
+  border-top: 2px solid var(--primary-color);
+  box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold-glow), transparent);
+  opacity: 0.2;
+  animation: footerGlow 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes footerGlow {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+footer h5 {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+  margin-bottom: 1rem;
+}
+
+footer p {
+  color: var(--text-color);
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+footer a:hover {
+  color: #F4D03F;
+  text-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes pulseResult {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.result-card {
+  animation: fadeIn 0.5s ease-out forwards, pulseResult 1.5s ease-in-out 0.5s;
+}
+
+/* Estilos adicionales - Monkey Food style */
+.text-muted {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.small {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Checkbox styling */
+.form-check-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 107, 0, 0.3);
+  border-radius: 8px;
+}
+
+.form-check-input:checked {
+  background-color: #ff6b00;
+  border-color: #ff6b00;
+}
+
+.form-check-label {
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.loading {
+  animation: pulse 1.5s infinite;
+}
+
+/* Estilos responsivos - Monkey Food style */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 2rem 1.5rem;
+  }
+  
+  header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .prize-icon {
+    font-size: 3.5rem;
+  }
+  
+  .prize-name {
+    font-size: 2rem;
+  }
+  
+  .prize-code {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    padding: 1rem 1.5rem;
+  }
+  
+  .btn-primary, .btn-outline-primary {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-body {
+    padding: 1.5rem 1rem;
+  }
+  
+  header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .prize-name {
+    font-size: 1.8rem;
+  }
+  
+  .prize-code {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+}
