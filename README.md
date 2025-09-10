@@ -28,7 +28,7 @@ PORT=3000
 NODE_ENV=production
 MONGODB_URI=${{MongoDB.DATABASE_URL}}
 JWT_SECRET=tu-clave-secreta-muy-segura-para-produccion
-ADMIN_PASSWORD=Pecera@2025!
+ADMIN_PASSWORD=admin123
 EMAIL_USER=tu-email@gmail.com
 EMAIL_PASS=tu-app-password-de-gmail
 EMAIL_FROM=noreply@monkeyfood.com
@@ -54,20 +54,16 @@ Tu aplicación estará disponible en: `https://tu-app.up.railway.app`
 
 ## 🔑 Credenciales por Defecto
 
-- **Admin Password:** `Pecera@2025!` (cambiar en variables de entorno)
+- **Admin Password:** `admin123` (cambiar en variables de entorno)
 - **Base de datos:** Se crea automáticamente
 
 ## 📊 Configuración de Premios
 
 Los premios están configurados en `server/controllers/prizeController.js`:
-- 🍔 Hamburguesa Clásica Gratis: 1% (50 premios)
-- 🍟 Patatas Gratis: 1% (50 premios)
-- 💰 Descuento 5%*: 10% (500 premios)
-- 💰 Descuento 10%*: 6% (300 premios)
-- 💰 Descuento 20%*: 2% (100 premios)
-
-*¡El descuento solo será aplicado en tus hamburguesas clásicas!
-- ❌ No Premiado: 80% (4000 participaciones)
+- 🍔 Hamburguesa Gratis: 5% (250 premios)
+- 🍟 Patatas Gratis: 5% (250 premios)
+- 💰 Descuento 10%: 80% (4000 premios)
+- 💰 Descuento 20%: 10% (500 premios)
 
 ## 🛠️ Estructura del Proyecto
 

@@ -98,7 +98,8 @@ document.addEventListener('DOMContentLoaded', async function() {
       // Mostrar el resultado
       showResult(data.data);
     } catch (error) {
-      showError(error.message);
+      console.error('Error al procesar la participación:', error);
+      showError(error.message || 'Error al procesar la participación');
     }
   });
   

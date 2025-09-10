@@ -150,7 +150,7 @@ PORT=3000<br>
 NODE_ENV=production<br>
 MONGODB_URI=${{MongoDB.DATABASE_URL}}<br>
 JWT_SECRET=tu-clave-secreta-muy-segura-para-produccion<br>
-ADMIN_PASSWORD=Pecera@2025!<br>
+ADMIN_PASSWORD=admin123<br>
 EMAIL_USER=tu-email@gmail.com<br>
 EMAIL_PASS=tu-app-password-de-gmail<br>
 EMAIL_FROM=noreply@monkeyfood.com
@@ -193,7 +193,7 @@ EMAIL_FROM=noreply@monkeyfood.com
         
         <div class="highlight">
             <ul>
-                <li><strong>Admin Password:</strong> <code>Pecera@2025!</code> (cambiar en variables de entorno)</li>
+                <li><strong>Admin Password:</strong> <code>admin123</code> (cambiar en variables de entorno)</li>
                 <li><strong>Base de datos:</strong> Se crea automáticamente</li>
             </ul>
         </div>
@@ -201,17 +201,12 @@ EMAIL_FROM=noreply@monkeyfood.com
         <h2><span class="emoji">📊</span> Configuración de Premios</h2>
         
         <p>Los premios están configurados en <code>server/controllers/prizeController.js</code>:</p>
-            <ul>
-                <li><span class="emoji">🍔</span> Hamburguesa Clásica Gratis: 1% (50 premios)</li>
-                <li><span class="emoji">🍟</span> Patatas Gratis: 1% (50 premios)</li>
-                <li><span class="emoji">💰</span> Descuento 5%*: 10% (500 premios)</li>
-                <li><span class="emoji">💰</span> Descuento 10%*: 6% (300 premios)</li>
-                <li><span class="emoji">💰</span> Descuento 20%*: 2% (100 premios)</li>
-            </ul>
-            <p><em>*¡El descuento solo será aplicado en tus hamburguesas clásicas!</em></p>
-            <ul>
-                <li><span class="emoji">❌</span> No Premiado: 80% (4000 participaciones)</li>
-            </ul>
+        <ul>
+            <li><span class="emoji">🍔</span> Hamburguesa Gratis: 5% (250 premios)</li>
+            <li><span class="emoji">🍟</span> Patatas Gratis: 5% (250 premios)</li>
+            <li><span class="emoji">💰</span> Descuento 10%: 80% (4000 premios)</li>
+            <li><span class="emoji">💰</span> Descuento 20%: 10% (500 premios)</li>
+        </ul>
 
         <h2><span class="emoji">🛠️</span> Estructura del Proyecto</h2>
         

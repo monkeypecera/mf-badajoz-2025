@@ -48,7 +48,7 @@ exports.limitParticipation = async (req, res, next) => {
     if (req.hasParticipated) {
       return res.status(400).json({
         success: false,
-        error: 'Este dispositivo ya ha participado en la promoción',
+        error: 'Ya has participado desde este dispositivo',
         participant: {
           name: req.participant.name,
           hasWon: req.participant.hasWon

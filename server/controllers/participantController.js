@@ -1,6 +1,6 @@
 const Participant = require('../models/Participant');
 const { getRandomPrize } = require('./prizeController');
-const { sendWinnerEmail } = require('../utils/emailService');
+const { sendWinnerEmail, sendTestEmail } = require('../utils/emailService');
 const nodemailer = require('nodemailer');
 
 // Registrar un nuevo participante
@@ -175,6 +175,50 @@ exports.getStats = async (req, res) => {
       }
     });
   } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Error del servidor'
+    });
+  }
+};
+
+// Enviar correo de prueba
+exports.sendTestEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        error: 'Email es requerido'
+      });
+    }
+
+    // Validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Formato de email inválido'
+      });
+    }
+
+    const result = await sendTestEmail(email);
+
+    if (result.success) {
+      res.status(200).json({
+        success: true,
+        message: 'Correo de prueba enviado correctamente',
+        messageId: result.messageId
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        error: result.error || 'Error al enviar correo de prueba'
+      });
+    }
+  } catch (error) {
+    console.error('Error en sendTestEmail:', error);
     res.status(500).json({
       success: false,
       error: 'Error del servidor'

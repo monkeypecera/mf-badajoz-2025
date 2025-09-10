@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const prizeTableBody = document.getElementById('prizeTableBody');
   const participantsContainer = document.getElementById('participantsContainer');
   const refreshStatsButton = document.getElementById('refreshStats');
+  const testEmailButton = document.getElementById('testEmail');
   const resetPrizesButton = document.getElementById('resetPrizes');
   
   // Cargar datos iniciales
@@ -21,6 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
     showMessage('Datos actualizados correctamente', 'success');
   });
   
+  testEmailButton.addEventListener('click', function() {
+    const email = prompt('Introduce el email donde enviar el correo de prueba:');
+    if (email && email.trim()) {
+      sendTestEmail(email.trim());
+    }
+  });
+
   resetPrizesButton.addEventListener('click', function() {
     if (confirm('¿Estás seguro de que deseas restablecer todos los premios a sus cantidades iniciales? Esta acción no se puede deshacer.')) {
       resetPrizes();
@@ -70,6 +78,35 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
   
+  // Función para enviar correo de prueba
+  function sendTestEmail(email) {
+    showMessage('Enviando correo de prueba...', 'success');
+    
+    fetch('/api/participants/test-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al enviar correo de prueba');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          showMessage(`Correo de prueba enviado correctamente a ${email}`, 'success');
+        } else {
+          throw new Error(data.error || 'Error desconocido');
+        }
+      })
+      .catch(error => {
+        showMessage(error.message, 'error');
+      });
+  }
+
   // Función para restablecer premios
   function resetPrizes() {
     fetch('/api/prizes/reset', {
