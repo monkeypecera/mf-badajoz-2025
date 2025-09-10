@@ -46,6 +46,25 @@ Tu aplicación estará disponible en: `https://tu-app.up.railway.app`
 4. Generar password para "Mail"
 5. Usar ese password en `EMAIL_PASS`
 
+### 🚨 Solución de Problemas de Email
+
+Si tienes errores al enviar correos:
+
+**Verificación rápida:**
+```bash
+node verificar_email.js
+```
+
+**Archivos de ayuda:**
+- `SOLUCION_RAPIDA_EMAIL.md` - Solución en 3 pasos
+- `DIAGNOSTICO_EMAIL_ERROR.md` - Diagnóstico completo
+- `SOLUCION_PROBLEMAS_EMAIL.md` - Guía detallada
+
+**Errores comunes:**
+- ❌ "Invalid login" → Usar contraseña de aplicación, no contraseña normal
+- ❌ "Connection timeout" → Verificar host/puerto y conexión
+- ❌ "Authentication failed" → Activar verificación en 2 pasos
+
 ## 🔧 URLs Importantes
 
 - **Página Principal:** `https://tu-dominio.com`
