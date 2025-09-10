@@ -259,3 +259,40 @@ exports.sendTestEmail = async (req, res) => {
     });
   }
 };
+
+// Exportar participantes a CSV
+exports.exportParticipants = async (req, res) => {
+  try {
+    const participants = await Participant.find({}).sort({ createdAt: -1 });
+    
+    // Crear contenido CSV
+    const csvHeader = 'Nombre,Email,Teléfono,Premio,Ha Ganado,Código de Premio,Fecha de Registro\n';
+    const csvContent = participants.map(participant => {
+      const name = `"${(participant.name || '').replace(/"/g, '""')}"`;
+      const email = `"${(participant.email || '').replace(/"/g, '""')}"`;
+      const phone = `"${(participant.phone || 'No proporcionado').replace(/"/g, '""')}"`;
+      const prize = `"${(participant.prize || 'Sin premio').replace(/"/g, '""')}"`;
+      const hasWon = participant.hasWon ? 'Sí' : 'No';
+      const prizeCode = `"${(participant.prizeCode || 'N/A').replace(/"/g, '""')}"`;
+      const createdAt = participant.createdAt ? new Date(participant.createdAt).toLocaleString('es-ES') : 'N/A';
+      
+      return `${name},${email},${phone},${prize},${hasWon},${prizeCode},${createdAt}`;
+    }).join('\n');
+    
+    const csv = csvHeader + csvContent;
+    
+    // Configurar headers para descarga
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="participantes_${new Date().toISOString().split('T')[0]}.csv"`);
+    res.setHeader('Content-Length', Buffer.byteLength(csv, 'utf8'));
+    
+    // Enviar CSV
+    res.status(200).send(csv);
+  } catch (error) {
+    console.error('Error al exportar participantes:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error al exportar participantes'
+    });
+  }
+};
