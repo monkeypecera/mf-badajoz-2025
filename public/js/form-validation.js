@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const participantForm = document.getElementById('participant-form');
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
-  const phoneInput = document.getElementById('phone');
+
   const termsCheckbox = document.getElementById('terms');
   
   // Función para validar el formato de email
@@ -26,14 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Nombre debe tener al menos 3 caracteres y no contener caracteres especiales excepto espacios y acentos
     const nameRegex = /^[\p{L}\s]{3,50}$/u;
     return nameRegex.test(name);
-  }
-  
-  // Función para validar el teléfono (opcional)
-  function isValidPhone(phone) {
-    if (!phone || phone.trim() === '') return true; // Es opcional
-    // Validar formato de teléfono español (9 dígitos, puede incluir espacios, guiones o paréntesis)
-    const phoneRegex = /^[\+]?[\d\s\-\(\)]{9,15}$/;
-    return phoneRegex.test(phone.replace(/\s/g, ''));
   }
   
   // Función para mostrar mensaje de error
@@ -118,12 +110,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Sanitizar todos los campos
     const sanitizedName = sanitizeInput(nameInput.value);
     const sanitizedEmail = sanitizeInput(emailInput.value);
-    const sanitizedPhone = sanitizeInput(phoneInput.value);
     
     // Actualizar valores sanitizados
     nameInput.value = sanitizedName;
     emailInput.value = sanitizedEmail;
-    phoneInput.value = sanitizedPhone;
     
     // Validar nombre
     if (sanitizedName === '') {
@@ -147,13 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
       showSuccess(emailInput);
     }
     
-    // Validar teléfono (opcional)
-    if (sanitizedPhone && !isValidPhone(sanitizedPhone)) {
-      showError(phoneInput, 'El formato del teléfono no es válido');
-      isValid = false;
-    } else {
-      showSuccess(phoneInput);
-    }
+
     
     // Validar términos y condiciones
     if (!termsCheckbox.checked) {

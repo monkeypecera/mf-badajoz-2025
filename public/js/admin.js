@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  document.getElementById('exportParticipants').addEventListener('click', exportParticipants);
-
   resetPrizesButton.addEventListener('click', function() {
     if (confirm('¿Estás seguro de que deseas restablecer todos los premios a sus cantidades iniciales? Esta acción no se puede deshacer.')) {
       resetPrizes();
@@ -130,36 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           throw new Error(data.error || 'Error desconocido');
         }
-      })
-      .catch(error => {
-        showMessage(error.message, 'error');
-      });
-  }
-
-  // Función para exportar participantes
-  function exportParticipants() {
-    showMessage('Generando archivo de exportación...', 'success');
-    
-    fetch('/api/participants/export')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error al exportar participantes');
-        }
-        return response.blob();
-      })
-      .then(blob => {
-        // Crear enlace de descarga
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        a.download = `participantes_${new Date().toISOString().split('T')[0]}.csv`;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-        
-        showMessage('Archivo exportado correctamente', 'success');
       })
       .catch(error => {
         showMessage(error.message, 'error');

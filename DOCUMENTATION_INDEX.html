@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐒 Monkey Food Competition - Documentation Hub</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 4em;
+            margin-bottom: 10px;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        .doc-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-left-color: #e74c3c;
+        }
+        .doc-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .doc-card p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        .doc-card .features {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        .doc-card .features li {
+            padding: 5px 0;
+            color: #27ae60;
+            position: relative;
+            padding-left: 20px;
+        }
+        .doc-card .features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .emoji {
+            font-size: 1.2em;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .ready {
+            background: #d4edda;
+            color: #155724;
+        }
+        .guide {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        .credentials {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .quick-start {
+            background: #f8d7da;
+            color: #721c24;
+            text-align: center;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 2px solid #dc3545;
+        }
+        .quick-start h2 {
+            margin-top: 0;
+            color: #721c24;
+        }
+        .quick-start ol {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+        }
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .tech-item {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #e9ecef;
+            font-weight: bold;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🐒</div>
+            <h1>Monkey Food Competition</h1>
+            <p class="subtitle">Documentation Hub - Todo lo que necesitas para desplegar tu competición online</p>
+            
+            <div class="tech-stack">
+                <span class="tech-item">Node.js</span>
+                <span class="tech-item">MongoDB</span>
+                <span class="tech-item">Express</span>
+                <span class="tech-item">HTML5</span>
+                <span class="tech-item">CSS3</span>
+                <span class="tech-item">JavaScript</span>
+            </div>
+        </div>
+
+        <div class="quick-start">
+            <h2><span class="emoji">🚀</span> Quick Start - 3 Pasos para Desplegar</h2>
+            <ol>
+                <li><strong>Subir a GitHub:</strong> Crear repositorio y subir código</li>
+                <li><strong>Desplegar en Railway:</strong> Conectar GitHub y añadir MongoDB</li>
+                <li><strong>Configurar Variables:</strong> Email, JWT secret, admin password</li>
+            </ol>
+            <p><strong>¡Tu competición estará online en menos de 10 minutos!</strong></p>
+        </div>
+
+        <div class="docs-grid">
+            <a href="README.html" class="doc-card">
+                <h3><span class="emoji">📖</span> README - Guía Principal</h3>
+                <p>Guía completa paso a paso para desplegar tu competición Monkey Food. Incluye instrucciones detalladas para Railway, configuración de email y estructura del proyecto.</p>
+                <ul class="features">
+                    <li>Despliegue en Railway (recomendado)</li>
+                    <li>Configuración de MongoDB</li>
+                    <li>Setup de email Gmail</li>
+                    <li>Estructura del proyecto</li>
+                    <li>Checklist de despliegue</li>
+                </ul>
+                <span class="status-badge ready">✅ Production Ready</span>
+            </a>
+
+            <a href="DEPLOYMENT_CREDENTIALS.html" class="doc-card">
+                <h3><span class="emoji">🔑</span> Credenciales de Despliegue</h3>
+                <p>Todas las credenciales, cuentas y configuraciones necesarias para hosting, base de datos, email y dominios. Información sensible y detallada.</p>
+                <ul class="features">
+                    <li>Cuentas de hosting (Railway, Vercel, Heroku)</li>
+                    <li>Configuración Gmail App Password</li>
+                    <li>MongoDB Atlas setup</li>
+                    <li>Generación de JWT secrets</li>
+                    <li>Costos y opciones gratuitas</li>
+                </ul>
+                <span class="status-badge credentials">🔒 Confidential</span>
+            </a>
+
+            <a href="../ONLINE_DEPLOYMENT_GUIDE.html" class="doc-card">
+                <h3><span class="emoji">🌐</span> Guía de Despliegue Online</h3>
+                <p>Guía técnica completa con múltiples opciones de hosting, configuración avanzada, monitoreo, seguridad y troubleshooting.</p>
+                <ul class="features">
+                    <li>Múltiples plataformas de hosting</li>
+                    <li>Configuración de dominios</li>
+                    <li>Monitoreo y analytics</li>
+                    <li>Seguridad y SSL</li>
+                    <li>Troubleshooting avanzado</li>
+                </ul>
+                <span class="status-badge guide">📚 Technical Guide</span>
+            </a>
+
+            <a href="../INSTALLATION_GUIDE_MAC.html" class="doc-card">
+                <h3><span class="emoji">💻</span> Instalación Local (Mac)</h3>
+                <p>Guía completa para instalar y ejecutar el proyecto localmente en macOS. Ideal para desarrollo y testing antes del despliegue.</p>
+                <ul class="features">
+                    <li>Instalación de dependencias</li>
+                    <li>Configuración de MongoDB local</li>
+                    <li>Variables de entorno</li>
+                    <li>Comandos útiles</li>
+                    <li>Troubleshooting local</li>
+                </ul>
+                <span class="status-badge guide">🖥️ Local Development</span>
+            </a>
+        </div>
+
+        <div class="quick-start" style="background: #d4edda; border-color: #28a745; color: #155724;">
+            <h2><span class="emoji">📁</span> Estructura del Proyecto</h2>
+            <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; font-family: monospace; font-size: 0.9em;">
+                    <strong>FINAL_PROJECT_TO_UPLOAD/</strong><br>
+                    ├── <strong>public/</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Frontend (HTML, CSS, JS)<br>
+                    ├── <strong>server/</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Backend Node.js<br>
+                    ├── <strong>database/</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Scripts de BD<br>
+                    ├── <strong>.env.example</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Variables de entorno<br>
+                    ├── <strong>deploy.sh</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Script de despliegue<br>
+                    ├── <strong>package.json</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Dependencias<br>
+                    └── <strong>README.html</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Esta documentación
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3><span class="emoji">🎯</span> ¿Por dónde empezar?</h3>
+            <p><strong>1.</strong> Lee el <a href="README.html">README.html</a> para el despliegue básico</p>
+            <p><strong>2.</strong> Consulta <a href="DEPLOYMENT_CREDENTIALS.html">DEPLOYMENT_CREDENTIALS.html</a> para las credenciales</p>
+            <p><strong>3.</strong> Usa la <a href="../ONLINE_DEPLOYMENT_GUIDE.html">Guía de Despliegue Online</a> para configuración avanzada</p>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                <p><strong>🚀 ¡Tu competición Monkey Food está lista para conquistar internet!</strong></p>
+                <p>Creado con ❤️ para Monkey Food Badajoz</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
