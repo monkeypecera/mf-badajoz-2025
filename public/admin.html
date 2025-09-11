@@ -171,7 +171,21 @@
   </style>
 </head>
 <body>
-  <div class="container-fluid p-0">
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal" style="display: block; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+    <div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: none; border-radius: 10px; width: 400px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+      <div style="margin-bottom: 20px;">
+        <img src="images/monkey-food-logo-new.svg" alt="Monkey Food Logo" style="height: 80px; width: auto;">
+      </div>
+      <h2 style="color: #ff6b00; margin-bottom: 20px;">Panel de Administración</h2>
+      <p style="margin-bottom: 20px; color: #666;">Introduce la contraseña para acceder:</p>
+      <div id="loginError" style="color: #dc3545; margin-bottom: 15px; display: none;">Contraseña incorrecta</div>
+      <input type="password" id="adminPassword" placeholder="Contraseña" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 20px; font-size: 16px;">
+      <button onclick="checkPassword()" style="background-color: #ff6b00; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;">Acceder</button>
+    </div>
+  </div>
+
+  <div id="adminContent" class="container-fluid p-0" style="display: none;">
     <!-- Header -->
     <header class="bg-dark text-white py-2 mb-4">
       <div class="container">
@@ -190,7 +204,9 @@
       <div class="admin-actions">
         <button id="refreshStats" class="btn btn-primary">Actualizar Datos</button>
         <button id="testEmail" class="btn btn-secondary">Test Email</button>
+        <button id="exportParticipants" class="btn btn-success">Exportar Participantes</button>
         <button id="resetPrizes" class="btn btn-danger">Restablecer Premios</button>
+        <button onclick="logout()" class="btn btn-secondary">Cerrar Sesión</button>
       </div>
     </div>
     
@@ -271,10 +287,54 @@
       </div>
     </footer>
   </div>
+  </div>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  <script>
+    // Función para verificar la contraseña
+    function checkPassword() {
+      const password = document.getElementById('adminPassword').value;
+      const correctPassword = 'Pecera@2025!';
+      
+      if (password === correctPassword) {
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+        document.getElementById('loginError').style.display = 'none';
+        // Guardar estado de autenticación
+        sessionStorage.setItem('adminAuthenticated', 'true');
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('adminPassword').value = '';
+      }
+    }
+    
+    // Función para cerrar sesión
+    function logout() {
+      sessionStorage.removeItem('adminAuthenticated');
+      document.getElementById('loginModal').style.display = 'block';
+      document.getElementById('adminContent').style.display = 'none';
+      document.getElementById('adminPassword').value = '';
+    }
+    
+    // Verificar autenticación al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+      if (sessionStorage.getItem('adminAuthenticated') === 'true') {
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+      }
+      
+      // Permitir envío con Enter
+      document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          checkPassword();
+        }
+      });
+    });
+  </script>
+  
   <script src="js/admin.js"></script>
 </body>
 </html>

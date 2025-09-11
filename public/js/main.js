@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const formData = new FormData(participantForm);
     const name = formData.get('name');
     const email = formData.get('email');
+    const phone = formData.get('phone');
 
     const deviceId = getDeviceId();
     
@@ -85,6 +86,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         body: JSON.stringify({
           name,
           email,
+          phone,
           deviceId
         })
       });

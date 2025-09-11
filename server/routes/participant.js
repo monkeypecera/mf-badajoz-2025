@@ -6,7 +6,8 @@ const {
   getParticipant, 
   checkDevice,
   getStats,
-  sendTestEmail 
+  sendTestEmail,
+  exportParticipants 
 } = require('../controllers/participantController');
 const { checkParticipation, limitParticipation } = require('../middleware/deviceIdentifier');
 const { validateParticipantData, rateLimiter } = require('../middleware/dataValidator');
@@ -20,5 +21,8 @@ router.get('/:id', getParticipant);
 
 // Ruta para test de email
 router.post('/test-email', sendTestEmail);
+
+// Ruta para exportar participantes
+router.get('/export', exportParticipants);
 
 module.exports = router;

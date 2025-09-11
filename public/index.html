@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="🐒 Participa en la promoción de apertura de Monkey Food Badajoz y gana increíbles premios. Hamburguesas gourmet, patatas premium y experiencias únicas te esperan. ¡Regístrate ahora y descubre la nueva era de la comida rápida!">
   <title>Monkey Food - Promoción Nueva Tienda Badajoz</title>
   <link rel="icon" type="image/svg+xml" href="images/monkey-food-logo-new.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -35,11 +36,14 @@
             </div>
             <div class="card-body text-center">
               <div class="mb-4">
-                <img src="images/prize-icons.png" alt="Premios disponibles" class="img-fluid" style="max-width: 100%;">
+                <img src="images/prize-icons.svg" alt="Premios disponibles" class="img-fluid" style="max-width: 100%;">
               </div>
               <h3 class="card-title" style="color: #ff6b00;">¡Bienvenido a la nueva era!</h3>
               <p class="card-text">Estamos celebrando la apertura de nuestra nueva tienda en <strong>Badajoz</strong> con increíbles premios.</p>
               <p class="card-text">Completa el formulario y descubre al instante si has ganado uno de nuestros fantásticos premios.</p>
+              <div class="alert alert-info mt-3">
+                <p class="mb-0"><i class="fas fa-info-circle me-2"></i><strong>¡Tienes un 5% de probabilidad de ganar!</strong> Cada participación tiene oportunidades reales de conseguir premios increíbles.</p>
+              </div>
               <div class="mt-4">
                 <button class="btn btn-primary btn-lg" id="start-btn">
                   <i class="fas fa-gift me-2"></i>¡Quiero Participar!
@@ -68,6 +72,10 @@
                 <div class="mb-3">
                   <label for="email" class="form-label"><i class="fas fa-envelope me-2"></i>Correo electrónico</label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                </div>
+                <div class="mb-3">
+                  <label for="phone" class="form-label"><i class="fas fa-phone me-2"></i>Teléfono <span class="text-muted">(opcional)</span></label>
+                  <input type="tel" class="form-control" id="phone" name="phone" placeholder="Ej: 612 345 678">
                 </div>
 
                 <div class="form-check mb-4 border-top pt-3">
