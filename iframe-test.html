@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Iframe - Monkey Food Competition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .iframe-container {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        .info {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .code {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐒 Test de Iframe - Monkey Food Competition</h1>
+        
+        <div class="success">
+            <strong>✅ ¡Headers configurados correctamente!</strong><br>
+            Los siguientes headers han sido configurados para permitir iframe embedding:
+            <ul>
+                <li><code>X-Frame-Options: ALLOWALL</code></li>
+                <li><code>Content-Security-Policy: frame-ancestors *</code></li>
+                <li><code>Access-Control-Allow-Origin: *</code></li>
+            </ul>
+        </div>
+
+        <div class="info">
+            <strong>📋 Instrucciones para WordPress:</strong><br>
+            Para embeber esta aplicación en tu página de WordPress, usa el siguiente código HTML:
+        </div>
+
+        <div class="code">
+&lt;iframe src="https://tu-app-render.onrender.com" 
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        allowfullscreen
+        style="border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);"&gt;
+&lt;/iframe&gt;
+        </div>
+
+        <div class="info">
+            <strong>🔧 Para Render:</strong><br>
+            Asegúrate de que tu URL de Render esté configurada correctamente. Reemplaza <code>tu-app-render.onrender.com</code> con tu URL real de Render.
+        </div>
+
+        <h2>Vista previa del iframe (localhost):</h2>
+        <div class="iframe-container">
+            <iframe src="http://localhost:3000" title="Monkey Food Competition"></iframe>
+        </div>
+
+        <div class="info">
+            <strong>🚀 Próximos pasos:</strong><br>
+            1. Despliega estos cambios en Render<br>
+            2. Usa tu URL de Render en lugar de localhost<br>
+            3. Copia el código iframe en tu página de WordPress<br>
+            4. ¡Disfruta de tu concurso embebido!
+        </div>
+    </div>
+</body>
+</html>
