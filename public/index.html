@@ -13,7 +13,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="container-fluid p-0">
+  <!-- Animación de intro del logo -->
+  <div class="logo-intro-overlay" id="logo-intro-overlay">
+    <div class="logo-intro">
+      <img src="images/monkey-food-logo-new.svg" alt="Monkey Food Logo">
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="main-content" id="main-content">
+    <div class="container-fluid p-0">
     <!-- Header -->
     <header class="bg-dark text-white py-2 mb-4">
       <div class="container">
@@ -172,22 +181,27 @@
 
           <!-- Tarjeta de dispositivo ya registrado (inicialmente oculta) -->
           <div class="card shadow mb-4 d-none" id="already-participated-card">
-            <div class="card-header bg-info text-white text-center">
-              <h2 class="mb-0"><i class="fas fa-info-circle me-2"></i>INFORMACIÓN</h2>
+            <div class="card-header bg-warning text-dark text-center">
+              <h2 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>YA HAS PARTICIPADO</h2>
             </div>
             <div class="card-body text-center">
-              <i class="fas fa-user-check text-info prize-icon mb-3" style="font-size: 5rem;"></i>
-              <h2 class="card-title">Ya has participado</h2>
-              <div class="alert alert-info my-3">
-                <p class="mb-0">Ya has participado desde este dispositivo. Solo se permite una participación por dispositivo.</p>
+              <i class="fas fa-user-times text-warning prize-icon mb-3" style="font-size: 5rem;"></i>
+              <h2 class="card-title text-warning">¡Participación ya registrada!</h2>
+              <div class="alert alert-warning my-3">
+                <p class="mb-0"><strong>YA HAS PARTICIPADO</strong> desde este dispositivo. Solo se permite una participación por dispositivo en esta promoción.</p>
               </div>
               <div class="mt-4 border-top pt-3">
-                <p class="card-text">¡Gracias por tu interés en Monkey Food!</p>
+                <p class="card-text">¡Gracias por tu participación en nuestra promoción!</p>
                 <p class="card-text">Te esperamos en nuestra nueva tienda en <strong>Badajoz</strong>.</p>
                 <p class="card-text"><strong>Dirección:</strong> AV. SINFORIANO MADROÑERO, 21</p>
-                <button class="btn btn-outline-primary mt-2" id="restart-btn-already">
-                  <i class="fas fa-home me-2"></i>Volver al inicio
-                </button>
+                <div class="d-grid gap-2 mt-4">
+                  <a href="https://monkey-food.es" class="btn btn-primary btn-lg" target="_blank">
+                    <i class="fas fa-external-link-alt me-2"></i>Volver a monkey-food.es
+                  </a>
+                  <button class="btn btn-outline-secondary" id="restart-btn-already">
+                    <i class="fas fa-home me-2"></i>Volver al inicio
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -214,6 +228,7 @@
         </div>
       </div>
     </footer>
+    </div>
   </div>
 
   <!-- Scripts -->

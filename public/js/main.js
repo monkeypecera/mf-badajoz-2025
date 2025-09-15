@@ -3,6 +3,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', async function() {
+  // Inicializar animación de intro del logo
+  initLogoIntro();
+  
   // Referencias a elementos del DOM
   const welcomeCard = document.getElementById('welcome-card');
   const registrationFormCard = document.getElementById('registration-form-card');
@@ -177,5 +180,26 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     // Combinar todo para formar el código
     return `${prefix}-${randomChars}-${suffix}`;
+  }
+  
+  // Función para inicializar la animación de intro del logo
+  function initLogoIntro() {
+    const logoOverlay = document.getElementById('logo-intro-overlay');
+    const mainContent = document.getElementById('main-content');
+    
+    // Mostrar la animación de intro durante 3.5 segundos
+    setTimeout(() => {
+      // Iniciar fade-out del logo
+      logoOverlay.classList.add('fade-out');
+      
+      // Mostrar el contenido principal
+      setTimeout(() => {
+        mainContent.classList.add('show');
+        // Remover completamente el overlay después del fade-out
+        setTimeout(() => {
+          logoOverlay.style.display = 'none';
+        }, 800);
+      }, 200);
+    }, 3500);
   }
 });
