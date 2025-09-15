@@ -24,8 +24,11 @@ exports.addDeviceId = (req, res, next) => {
 // Middleware para verificar si un dispositivo ya ha participado
 exports.checkParticipation = async (req, res, next) => {
   try {
-    // Obtener el ID del dispositivo
-    const deviceId = req.deviceId || getDeviceId(req);
+    // Obtener el ID del dispositivo del cuerpo de la solicitud o generar uno nuevo
+    const deviceId = req.body.deviceId || req.deviceId || getDeviceId(req);
+    
+    // Asegurar que el deviceId esté disponible en la solicitud
+    req.deviceId = deviceId;
     
     // Verificar si el dispositivo ya ha participado
     const existingParticipant = await Participant.findOne({ deviceId });

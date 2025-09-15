@@ -33,6 +33,7 @@ const nodemailer = require('nodemailer');
 exports.registerParticipant = async (req, res) => {
   try {
     const { name, email, phone } = req.body;
+    // Usar el deviceId que fue validado en el middleware
     const deviceId = req.deviceId;
 
     // La verificación de participación previa ya se realiza en el middleware
