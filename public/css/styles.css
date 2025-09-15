@@ -1,3 +1,5 @@
+/* Tipografía principal: Oswald como fuente principal */
+
 /* Google Fonts - Inter y Cardo (monkey-food.es fonts) */
 /* Las fuentes se cargan desde el HTML para mejor rendimiento */
 
@@ -18,7 +20,7 @@
 
 /* Estilos generales - Monkey Food Jungle branding */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: #000000;
   color: #666666;
   min-height: 100vh;
@@ -27,9 +29,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Títulos con fuente Cardo (monkey-food.es style) */
+/* Títulos con fuente Oswald */
 h1, h2, h3, h4, h5, h6, .heading-font {
-  font-family: 'Cardo', Georgia, serif;
+  font-family: 'Oswald', Georgia, serif;
   font-weight: 700;
   color: inherit;
 }
