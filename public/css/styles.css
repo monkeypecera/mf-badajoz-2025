@@ -853,13 +853,17 @@ footer a:hover {
 }
 
 .logo-intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   animation: logoIntroAnimation 3s ease-in-out;
 }
 
 .logo-intro img {
-  max-width: 300px;
-  height: auto;
+  height: 150px;
+  width: auto;
+  max-width: 90vw;
   filter: drop-shadow(0 0 30px rgba(212,175,55,0.8));
   animation: logoGlow 2s ease-in-out infinite alternate;
 }
@@ -900,4 +904,17 @@ footer a:hover {
 
 .main-content.show {
   opacity: 1;
+}
+
+/* Responsive adjustments for logo intro */
+@media (max-width: 768px) {
+  .logo-intro img {
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-intro img {
+    height: 100px;
+  }
 }

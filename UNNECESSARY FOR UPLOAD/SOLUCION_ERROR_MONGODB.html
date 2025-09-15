@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solución Error MongoDB - Monkey Food</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #c0392b;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        .error {
+            background: #ffebee;
+            border-left: 5px solid #f44336;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .solution {
+            background: #e8f5e8;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .step {
+            background: #f8f9fa;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .step h3 {
+            color: #007bff;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        .code {
+            background: #f1f3f4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #856404;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        ol, ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+            font-size: 1.05em;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚨 Solución Error MongoDB</h1>
+        
+        <div class="error">
+            <h2><span class="emoji">❌</span> Error Detectado</h2>
+            <div class="code">Error al conectar a MongoDB: URI must include hostname, domain name, and tld</div>
+            <p><strong>Causa:</strong> Falta configurar la variable de entorno <code>MONGODB_URI</code> en Render.</p>
+        </div>
+
+        <div class="solution">
+            <h2><span class="emoji">✅</span> Solución Rápida</h2>
+            <p>Necesitas añadir una base de datos MongoDB y configurar la variable de entorno en Render.</p>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">1️⃣</span> Añadir Base de Datos MongoDB</h3>
+            <ol>
+                <li>Ve a tu dashboard de Render: <a href="https://dashboard.render.com" target="_blank">dashboard.render.com</a></li>
+                <li>En tu proyecto, haz clic en <span class="highlight">"New +"</span></li>
+                <li>Selecciona <span class="highlight">"Database"</span></li>
+                <li>Elige <span class="highlight">"MongoDB"</span></li>
+                <li>Configura:
+                    <ul>
+                        <li><strong>Name:</strong> monkey-food-db</li>
+                        <li><strong>Database User:</strong> admin</li>
+                        <li><strong>Region:</strong> Oregon (US West) - recomendado</li>
+                        <li><strong>Plan:</strong> Free (para pruebas)</li>
+                    </ul>
+                </li>
+                <li>Haz clic en <span class="highlight">"Create Database"</span></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">2️⃣</span> Obtener la URI de Conexión</h3>
+            <ol>
+                <li>Una vez creada la base de datos, ve a la pestaña <span class="highlight">"Connect"</span></li>
+                <li>Copia la <span class="highlight">"External Connection String"</span></li>
+                <li>Debería verse así:</li>
+                <div class="code">mongodb://admin:PASSWORD@dpg-xxxxx-a.oregon-postgres.render.com/monkey_food_db</div>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">3️⃣</span> Configurar Variables de Entorno</h3>
+            <ol>
+                <li>Ve a tu servicio web (tu aplicación)</li>
+                <li>Haz clic en <span class="highlight">"Environment"</span> en el menú lateral</li>
+                <li>Añade estas variables:</li>
+            </ol>
+            
+            <div class="code">
+MONGODB_URI=mongodb://admin:TU_PASSWORD@dpg-xxxxx-a.oregon-postgres.render.com/monkey_food_db
+NODE_ENV=production
+PORT=10000
+JWT_SECRET=tu-clave-secreta-muy-segura-2025
+ADMIN_PASSWORD=AdminMF2025!
+EMAIL_USER=tu-email@gmail.com
+EMAIL_PASS=tu-app-password-gmail
+EMAIL_FROM=noreply@monkeyfood.com
+            </div>
+            
+            <ol start="4">
+                <li>Haz clic en <span class="highlight">"Save Changes"</span></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">4️⃣</span> Redesplegar la Aplicación</h3>
+            <ol>
+                <li>Ve a la pestaña <span class="highlight">"Deploys"</span></li>
+                <li>Haz clic en <span class="highlight">"Manual Deploy"</span></li>
+                <li>Selecciona <span class="highlight">"Deploy latest commit"</span></li>
+                <li>Espera a que termine el despliegue ⏳</li>
+            </ol>
+        </div>
+
+        <div class="warning">
+            <h3><span class="emoji">⚠️</span> Configuración de Email (Opcional)</h3>
+            <p>Para que funcionen las notificaciones por email:</p>
+            <ol>
+                <li>Ve a tu <a href="https://myaccount.google.com/security" target="_blank">cuenta de Google</a></li>
+                <li>Activa la verificación en 2 pasos</li>
+                <li>Ve a "Contraseñas de aplicaciones"</li>
+                <li>Genera una contraseña para "Correo"</li>
+                <li>Usa esa contraseña en <code>EMAIL_PASS</code></li>
+            </ol>
+        </div>
+
+        <div class="success">
+            <h3><span class="emoji">🎉</span> ¡Verificar que Funciona!</h3>
+            <p>Después del redespliegue, deberías ver:</p>
+            <div class="code">Servidor corriendo en el puerto 10000<br>✅ Conectado a MongoDB exitosamente</div>
+            <p>Tu aplicación estará disponible en: <strong>https://tu-app.onrender.com</strong></p>
+        </div>
+
+        <div class="step">
+            <h3><span class="emoji">🔧</span> Próximos Pasos</h3>
+            <ol>
+                <li>Accede a tu aplicación: <code>https://tu-app.onrender.com</code></li>
+                <li>Ve al panel de admin: <code>https://tu-app.onrender.com/admin.html</code></li>
+                <li>Usa la contraseña: <span class="highlight">AdminMF2025!</span></li>
+                <li>Haz clic en <span class="highlight">"Inicializar Premios"</span></li>
+                <li>¡Tu concurso estará listo! 🎯</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; color: #666;">
+            <p>🐒 <strong>Monkey Food Competition 2025</strong></p>
+            <p>¡Problema resuelto! Tu aplicación ya debería funcionar correctamente.</p>
+        </div>
+    </div>
+</body>
+</html>
