@@ -4,180 +4,193 @@
 
 document.addEventListener('DOMContentLoaded', async function() {
   // Referencias a elementos del DOM
-  const welcomeCard = document.getElementById('welcome-card');
-  const registrationFormCard = document.getElementById('registration-form-card');
-  const resultCard = document.getElementById('result-card');
-  const errorCard = document.getElementById('error-card');
-  const alreadyParticipatedCard = document.getElementById('already-participated-card');
-  const participantForm = document.getElementById('participant-form');
-  const startBtn = document.getElementById('start-btn');
-  const restartBtn = document.getElementById('restart-btn');
-  const restartBtnNoPrize = document.getElementById('restart-btn-no-prize');
-  const restartBtnError = document.getElementById('restart-btn-error');
-  const restartBtnAlready = document.getElementById('restart-btn-already');
-  const winnerContent = document.getElementById('winner-content');
-  const noPrizeContent = document.getElementById('no-prize-content');
+  const loadingScreen = document.getElementById('loading-screen');
+  const mainContainer = document.getElementById('main-container');
+  const participationForm = document.getElementById('participation-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const resultMessage = document.getElementById('result-message');
+  
+  // Simular tiempo de carga y luego mostrar el contenido principal
+  setTimeout(() => {
+    if (loadingScreen) {
+      loadingScreen.style.display = 'none';
+    }
+    if (mainContainer) {
+      mainContainer.style.display = 'block';
+    }
+  }, 2000); // 2 segundos de pantalla de carga
   
   // Verificar si el dispositivo ya ha participado
   try {
-    const { hasParticipated } = await checkDeviceParticipation();
+    const deviceId = getDeviceId();
+    const response = await fetch(`/api/participants/check/${deviceId}`);
     
-    if (hasParticipated) {
-      // Si ya ha participado, mostrar la tarjeta correspondiente
-      hideAllCards();
-      alreadyParticipatedCard.classList.remove('d-none');
+    if (response.ok) {
+      const data = await response.json();
+      if (data.hasParticipated) {
+        showMessage('Ya has participado en este concurso desde este dispositivo. ¡Gracias por participar!', 'info');
+        disableForm();
+      }
     }
   } catch (error) {
-    console.error('Error al verificar la participación:', error);
+    console.log('No se pudo verificar la participación previa, continuando...');
   }
-  
-  // Evento para el botón de inicio
-  startBtn.addEventListener('click', function() {
-    hideAllCards();
-    registrationFormCard.classList.remove('d-none');
-  });
-  
-  // Eventos para los botones de reinicio
-  restartBtn.addEventListener('click', function() {
-    hideAllCards();
-    welcomeCard.classList.remove('d-none');
-  });
-  
-  restartBtnNoPrize.addEventListener('click', function() {
-    hideAllCards();
-    welcomeCard.classList.remove('d-none');
-  });
-  
-  restartBtnError.addEventListener('click', function() {
-    hideAllCards();
-    welcomeCard.classList.remove('d-none');
-  });
-  
-  restartBtnAlready.addEventListener('click', function() {
-    hideAllCards();
-    welcomeCard.classList.remove('d-none');
-  });
   
   // Evento para el envío del formulario
-  participantForm.addEventListener('submit', async function(event) {
-    event.preventDefault();
-    
-    // Obtener los datos del formulario
-    const formData = new FormData(participantForm);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const phone = formData.get('phone');
-
-    const deviceId = getDeviceId();
-    
-    // Validar los datos del formulario
-    if (!name || !email) {
-      showError('Por favor, completa todos los campos del formulario.');
-      return;
-    }
-    
-    try {
-      // Enviar los datos al servidor
-      const response = await fetch('/api/participants', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          deviceId
-        })
-      });
+  if (participationForm) {
+    participationForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
       
-      const data = await response.json();
+      // Obtener los datos del formulario
+      const formData = new FormData(participationForm);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const phone = formData.get('phone');
+      const terms = formData.get('terms');
       
-      if (!response.ok) {
-        throw new Error(data.error || 'Error al registrar la participación');
+      // Validar los datos del formulario
+      if (!name || !email || !terms) {
+        showMessage('Por favor, completa todos los campos obligatorios y acepta los términos.', 'error');
+        return;
       }
       
-      // Mostrar el resultado
-      showResult(data.data);
-    } catch (error) {
-      console.error('Error al procesar la participación:', error);
-      showError(error.message || 'Error al procesar la participación');
-    }
-  });
-  
-  // Función para ocultar todas las tarjetas
-  function hideAllCards() {
-    welcomeCard.classList.add('d-none');
-    registrationFormCard.classList.add('d-none');
-    resultCard.classList.add('d-none');
-    errorCard.classList.add('d-none');
-    alreadyParticipatedCard.classList.add('d-none');
+      // Validar email
+      if (!isValidEmail(email)) {
+        showMessage('Por favor, introduce un email válido.', 'error');
+        return;
+      }
+      
+      const deviceId = getDeviceId();
+      
+      // Mostrar estado de carga
+      setLoadingState(true);
+      
+      try {
+        // Enviar los datos al servidor
+        const response = await fetch('/api/participants', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            deviceId
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Error al registrar la participación');
+        }
+        
+        // Mostrar el resultado
+        showResult(data.data);
+        
+      } catch (error) {
+        console.error('Error al procesar la participación:', error);
+        showMessage(error.message || 'Error al procesar la participación. Inténtalo de nuevo.', 'error');
+      } finally {
+        setLoadingState(false);
+      }
+    });
   }
   
-  // Función para mostrar un error
-  function showError(message) {
-    hideAllCards();
-    errorCard.querySelector('.error-message').textContent = message;
-    errorCard.classList.remove('d-none');
+  // Función para mostrar mensajes
+  function showMessage(message, type = 'info') {
+    if (!resultMessage) return;
+    
+    resultMessage.innerHTML = `
+      <div class="alert alert-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'info'}">
+        ${message}
+      </div>
+    `;
+    resultMessage.style.display = 'block';
+    
+    // Scroll al mensaje
+    resultMessage.scrollIntoView({ behavior: 'smooth' });
   }
   
   // Función para mostrar el resultado
   function showResult(data) {
-    hideAllCards();
-    
     const { participant, prize } = data;
     
-    // Limpiar el formulario
-    participantForm.reset();
-    
-    // Mostrar el contenido correspondiente según si ha ganado o no
-    if (participant.hasWon) {
-      winnerContent.classList.remove('d-none');
-      noPrizeContent.classList.add('d-none');
-      
+    if (participant.hasWon && prize) {
       // Iniciar animación de confeti si está disponible
       if (typeof startConfetti === 'function') {
         setTimeout(() => startConfetti(), 500);
       }
       
-      // Mostrar el nombre del premio
-      const prizeName = resultCard.querySelector('.prize-name');
-      prizeName.textContent = prize.name;
-      
-      // Mostrar la descripción del premio
-      const prizeDescription = resultCard.querySelector('.prize-description');
-      if (prize.description) {
-        prizeDescription.textContent = prize.description;
-      } else {
-        prizeDescription.textContent = '¡Un delicioso premio de Monkey Food!';
-      }
-      
-      // Mostrar el código del premio recibido del servidor
-      const prizeCode = resultCard.querySelector('.prize-code');
-      // Si el servidor envió un código, usarlo; de lo contrario, generarlo localmente
-      if (participant.prizeCode) {
-        prizeCode.textContent = participant.prizeCode;
-      } else {
-        prizeCode.textContent = generatePrizeCode(participant._id, prize._id);
-      }
+      showMessage(`
+        <div class="text-center">
+          <h3 class="text-success mb-3">🎉 ¡FELICIDADES! 🎉</h3>
+          <p class="mb-2"><strong>Has ganado:</strong> ${prize.name}</p>
+          ${prize.description ? `<p class="mb-2">${prize.description}</p>` : ''}
+          ${participant.prizeCode ? `<p class="mb-2"><strong>Código del premio:</strong> <code>${participant.prizeCode}</code></p>` : ''}
+          <p class="text-muted">Recibirás un email con los detalles de tu premio.</p>
+          <a href="https://monkey-food.es" class="btn btn-primary mt-3">Visitar Monkey Food</a>
+        </div>
+      `, 'success');
     } else {
-      winnerContent.classList.add('d-none');
-      noPrizeContent.classList.remove('d-none');
+      showMessage(`
+        <div class="text-center">
+          <h3 class="mb-3">😔 Esta vez no ha habido suerte</h3>
+          <p class="mb-2">¡Pero no te preocupes! Sigue visitando Monkey Food para más oportunidades.</p>
+          <a href="https://monkey-food.es" class="btn btn-primary mt-3">Visitar Monkey Food</a>
+        </div>
+      `, 'info');
     }
     
-    resultCard.classList.remove('d-none');
+    // Deshabilitar el formulario después de participar
+    disableForm();
   }
   
-  // Función para generar un código de premio
-  function generatePrizeCode(participantId, prizeId) {
-    // Tomar los primeros 4 caracteres del ID del participante y los últimos 4 del premio
-    const prefix = participantId.substring(0, 4).toUpperCase();
-    const suffix = prizeId.substring(prizeId.length - 4).toUpperCase();
+  // Función para deshabilitar el formulario
+  function disableForm() {
+    if (participationForm) {
+      const inputs = participationForm.querySelectorAll('input, button');
+      inputs.forEach(input => {
+        input.disabled = true;
+      });
+    }
+  }
+  
+  // Función para establecer el estado de carga
+  function setLoadingState(loading) {
+    if (!submitBtn) return;
     
-    // Generar 4 caracteres aleatorios
-    const randomChars = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
     
-    // Combinar todo para formar el código
-    return `${prefix}-${randomChars}-${suffix}`;
+    if (loading) {
+      if (btnText) btnText.style.display = 'none';
+      if (btnLoading) btnLoading.style.display = 'inline-block';
+      submitBtn.disabled = true;
+    } else {
+      if (btnText) btnText.style.display = 'inline-block';
+      if (btnLoading) btnLoading.style.display = 'none';
+      submitBtn.disabled = false;
+    }
+  }
+  
+  // Función para validar email
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 });
+
+// Función para generar un código de premio
+function generatePrizeCode(participantId, prizeId) {
+  // Tomar los primeros 4 caracteres del ID del participante y los últimos 4 del premio
+  const prefix = participantId.substring(0, 4).toUpperCase();
+  const suffix = prizeId.substring(prizeId.length - 4).toUpperCase();
+  
+  // Generar 4 caracteres aleatorios
+  const randomChars = Math.random().toString(36).substring(2, 6).toUpperCase();
+  
+  // Combinar todo para formar el código
+  return `${prefix}-${randomChars}-${suffix}`;
+}
