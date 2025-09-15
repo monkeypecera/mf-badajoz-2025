@@ -1,5 +1,5 @@
-/* Google Fonts - Oswald */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+/* Google Fonts - Inter y Cardo (monkey-food.es fonts) */
+/* Las fuentes se cargan desde el HTML para mejor rendimiento */
 
 /* Variables de color - Monkey Food Exact Match */
 :root {
@@ -18,13 +18,20 @@
 
 /* Estilos generales - Monkey Food Jungle branding */
 body {
-  font-family: 'Monkey Food', 'Oswald', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: #000000;
   color: #666666;
   min-height: 100vh;
   position: relative;
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+/* Títulos con fuente Cardo (monkey-food.es style) */
+h1, h2, h3, h4, h5, h6, .heading-font {
+  font-family: 'Cardo', Georgia, serif;
+  font-weight: 700;
+  color: inherit;
 }
 
 body::before {
@@ -132,8 +139,8 @@ header::before {
 }
 
 header h1 {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 900;
+  font-family: 'Cardo', Georgia, serif;
+  font-weight: 700;
   font-size: 2.8rem;
   color: #000000;
   text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.5);
