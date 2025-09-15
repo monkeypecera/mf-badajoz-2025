@@ -18,9 +18,9 @@
 
 /* Estilos generales - Monkey Food Jungle branding */
 body {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Monkey Food', 'Oswald', sans-serif;
   background: #000000;
-  color: #f7ba26;
+  color: #666666;
   min-height: 100vh;
   position: relative;
   line-height: 1.6;

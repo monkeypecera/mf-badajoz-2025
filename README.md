@@ -1,141 +1,214 @@
-# 🐒 Monkey Food Competition - Production Ready
+# 🐒 Monkey Food Competition
 
-¡Proyecto listo para subir online! Este folder contiene todos los archivos necesarios para desplegar la competición de Monkey Food en la nube.
+## Descripción
 
-## 🚀 Despliegue Rápido (Railway - Recomendado)
+Sistema de concurso interactivo para Monkey Food con gestión de premios, participantes y notificaciones por email. Incluye panel de administración completo y sistema anti-fraude.
 
-### 1. Subir a GitHub
+## ✨ Características Principales
+
+- 🎯 **Sistema de Concurso**: Participación con validación de datos
+- 🏆 **Gestión de Premios**: Sistema dinámico de premios con probabilidades
+- 🛡️ **Anti-Fraude**: Identificación única por dispositivo
+- 📧 **Notificaciones Email**: Envío automático a ganadores
+- 👨‍💼 **Panel Admin**: Gestión completa de participantes y premios
+- 📊 **Estadísticas**: Visualización de datos en tiempo real
+- 🔒 **Seguridad**: Validación, sanitización y protección CSRF
+- 📱 **Responsive**: Diseño adaptable a todos los dispositivos
+- 🖼️ **Iframe Ready**: Configurado para embedding en WordPress
+
+## 🚀 Instalación Rápida
+
+### Prerrequisitos
+- Node.js 16+ 
+- MongoDB Atlas (cuenta gratuita)
+- Cuenta de email (Gmail recomendado)
+
+### 1. Clonar el repositorio
 ```bash
-git init
-git add .
-git commit -m "Monkey Food Competition - Ready for production"
-git branch -M main
-git remote add origin https://github.com/TU-USUARIO/monkey-food-competition.git
-git push -u origin main
+git clone https://github.com/tu-usuario/monkey-food-competition.git
+cd monkey-food-competition
 ```
 
-### 2. Desplegar en Railway
-1. Ir a [Railway.app](https://railway.app)
-2. Crear cuenta (gratis)
-3. "New Project" > "Deploy from GitHub repo"
-4. Seleccionar tu repositorio
-5. Añadir base de datos: "+ New" > "Database" > "Add MongoDB"
-
-### 3. Configurar Variables de Entorno
-En Railway > Settings > Environment Variables:
+### 2. Instalar dependencias
+```bash
+npm install
 ```
+
+### 3. Configurar variables de entorno
+Copia `.env.example` a `.env` y configura:
+
+```env
+# MongoDB
+MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/monkeyfood
+
+# Email (Gmail)
+EMAIL_USER=tu-email@gmail.com
+EMAIL_PASS=tu-app-password
+
+# Admin
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=tu-password-seguro
+
+# Servidor
 PORT=3000
 NODE_ENV=production
-MONGODB_URI=${{MongoDB.DATABASE_URL}}
-JWT_SECRET=tu-clave-secreta-muy-segura-para-produccion
-ADMIN_PASSWORD=admin123
-EMAIL_USER=tu-email@gmail.com
-EMAIL_PASS=tu-app-password-de-gmail
-EMAIL_FROM=noreply@monkeyfood.com
 ```
 
-### 4. ¡Listo!
-Tu aplicación estará disponible en: `https://tu-app.up.railway.app`
-
-## 📧 Configuración de Email
-
-### Gmail App Password
-1. Ir a [Google Account](https://myaccount.google.com)
-2. Security > 2-Step Verification (activar)
-3. Security > App passwords
-4. Generar password para "Mail"
-5. Usar ese password en `EMAIL_PASS`
-
-### 🚨 Solución de Problemas de Email
-
-Si tienes errores al enviar correos:
-
-**Verificación rápida:**
+### 4. Inicializar base de datos
 ```bash
-node verificar_email.js
+node database/init.js
 ```
 
-**Archivos de ayuda:**
-- `SOLUCION_RAPIDA_EMAIL.md` - Solución en 3 pasos
-- `DIAGNOSTICO_EMAIL_ERROR.md` - Diagnóstico completo
-- `SOLUCION_PROBLEMAS_EMAIL.md` - Guía detallada
+### 5. Ejecutar la aplicación
+```bash
+npm start
+```
 
-**Errores comunes:**
-- ❌ "Invalid login" → Usar contraseña de aplicación, no contraseña normal
-- ❌ "Connection timeout" → Verificar host/puerto y conexión
-- ❌ "Authentication failed" → Activar verificación en 2 pasos
-
-## 🔧 URLs Importantes
-
-- **Página Principal:** `https://tu-dominio.com`
-- **Panel Admin:** `https://tu-dominio.com/admin.html`
-- **Términos:** `https://tu-dominio.com/terms.html`
-
-## 🔑 Credenciales por Defecto
-
-- **Admin Password:** `admin123` (cambiar en variables de entorno)
-- **Base de datos:** Se crea automáticamente
-
-## 📊 Configuración de Premios
-
-Los premios están configurados en `server/controllers/prizeController.js`:
-- 🍔 Hamburguesa Gratis: 5% (250 premios)
-- 🍟 Patatas Gratis: 5% (250 premios)
-- 💰 Descuento 10%: 80% (4000 premios)
-- 💰 Descuento 20%: 10% (500 premios)
-
-## 🛠️ Estructura del Proyecto
+## 📁 Estructura del Proyecto
 
 ```
-FINAL_PROJECT_TO_UPLOAD/
-├── public/                 # Frontend files
-│   ├── index.html         # Main page
-│   ├── admin.html         # Admin panel
-│   ├── terms.html         # Terms & conditions
-│   ├── css/               # Styles
-│   ├── js/                # JavaScript
-│   └── images/            # Images and assets
-├── server/                # Backend Node.js
-│   ├── index.js           # Main server file
-│   ├── controllers/       # Business logic
-│   ├── models/            # Database models
-│   ├── routes/            # API routes
-│   └── middleware/        # Custom middleware
-├── database/              # Database scripts
-├── package.json           # Dependencies
-├── .env.example           # Environment variables template
-└── README.md              # This file
+monkey-food-competition/
+├── 📁 database/           # Configuración y scripts de BD
+│   ├── db.js             # Conexión MongoDB
+│   ├── init.js           # Inicialización de premios
+│   └── maintenance.js    # Mantenimiento BD
+├── 📁 public/            # Archivos estáticos
+│   ├── admin.html        # Panel de administración
+│   ├── index.html        # Página principal
+│   ├── 📁 css/          # Estilos
+│   ├── 📁 js/           # JavaScript frontend
+│   └── 📁 images/       # Imágenes y assets
+├── 📁 server/            # Backend Node.js
+│   ├── 📁 controllers/  # Lógica de negocio
+│   ├── 📁 middleware/   # Middleware personalizado
+│   ├── 📁 models/       # Modelos MongoDB
+│   ├── 📁 routes/       # Rutas API
+│   └── 📁 utils/        # Utilidades
+├── .env.example          # Plantilla variables entorno
+├── package.json          # Dependencias npm
+└── deploy.sh            # Script de despliegue
 ```
+
+## 🔧 Configuración Detallada
+
+### MongoDB Atlas
+1. Crear cuenta en [MongoDB Atlas](https://www.mongodb.com/atlas)
+2. Crear cluster gratuito
+3. Configurar usuario y obtener URI de conexión
+4. Añadir IP 0.0.0.0/0 para acceso desde cualquier lugar
+
+### Email con Gmail
+1. Activar autenticación de 2 factores
+2. Generar contraseña de aplicación
+3. Usar la contraseña de aplicación en `EMAIL_PASS`
+
+### Panel de Administración
+- URL: `/admin.html`
+- Credenciales: Configuradas en `.env`
+- Funciones: Gestión premios, participantes, estadísticas
+
+## 🌐 Despliegue
+
+### Render (Recomendado)
+1. Conectar repositorio GitHub
+2. Configurar variables de entorno
+3. Desplegar automáticamente
+
+### Otras plataformas
+- Heroku
+- Vercel
+- Railway
+- DigitalOcean
+
+## 🖼️ Embedding en WordPress
+
+El proyecto está configurado para funcionar en iframes:
+
+```html
+<iframe src="https://tu-app.onrender.com" 
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        allowfullscreen>
+</iframe>
+```
+
+## 📊 API Endpoints
+
+### Participantes
+- `POST /api/participants` - Crear participante
+- `GET /api/participants` - Listar participantes (admin)
+
+### Premios
+- `GET /api/prizes` - Obtener premios disponibles
+- `POST /api/prizes/assign` - Asignar premio
+- `PUT /api/prizes/reset` - Reiniciar premios (admin)
+
+### Admin
+- `POST /api/admin/login` - Login administrador
+- `GET /api/admin/stats` - Estadísticas
+- `POST /api/admin/test-email` - Probar email
+
+## 🛠️ Desarrollo
+
+### Ejecutar en modo desarrollo
+```bash
+npm run dev
+```
+
+### Estructura de archivos importantes
+- `server/index.js` - Servidor principal
+- `public/js/main.js` - Lógica frontend principal
+- `public/js/admin.js` - Panel administración
+- `server/utils/emailService.js` - Servicio de email
 
 ## 🔒 Seguridad
 
-- ✅ Validación de datos
+- ✅ Validación y sanitización de datos
 - ✅ Protección CSRF
-- ✅ Sanitización SQL
 - ✅ Rate limiting
-- ✅ Identificación única por dispositivo
-- ✅ SSL/HTTPS automático
+- ✅ Headers de seguridad
+- ✅ Prevención SQL injection
+- ✅ Sistema anti-fraude por dispositivo
 
-## 📱 Características
+## 🐛 Solución de Problemas
 
-- ✅ Responsive design
-- ✅ Sistema de premios aleatorio
-- ✅ Panel de administración
-- ✅ Notificaciones por email
-- ✅ Prevención de participación múltiple
-- ✅ Términos y condiciones
-- ✅ Branding completo de Monkey Food
+### Error de conexión MongoDB
+```bash
+# Verificar URI de conexión
+node -e "console.log(process.env.MONGODB_URI)"
+```
 
-## 🆘 Soporte
+### Error de email
+```bash
+# Probar configuración email
+node server/utils/emailService.js
+```
 
-Si tienes problemas:
-1. Revisa las variables de entorno
-2. Verifica la conexión a la base de datos
-3. Consulta los logs en tu plataforma de hosting
-4. Revisa la guía completa: `ONLINE_DEPLOYMENT_GUIDE.html`
+### Puerto en uso
+```bash
+# Cambiar puerto en .env
+PORT=3001
+```
+
+## 📝 Licencia
+
+MIT License - Ver archivo LICENSE para más detalles.
+
+## 🤝 Contribuir
+
+1. Fork el proyecto
+2. Crear rama feature (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit cambios (`git commit -am 'Añadir nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Crear Pull Request
+
+## 📞 Soporte
+
+- 📧 Email: soporte@monkeyfood.es
+- 🐛 Issues: [GitHub Issues](https://github.com/tu-usuario/monkey-food-competition/issues)
+- 📖 Documentación: Ver archivos `INSTALLATION_GUIDE.md` y `USER_GUIDE.md`
 
 ---
 
-**¡Tu competición Monkey Food está lista para conquistar internet! 🚀**
-
-Creado con ❤️ para Monkey Food Badajoz
+**Desarrollado con ❤️ para Monkey Food**
