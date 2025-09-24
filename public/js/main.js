@@ -21,18 +21,20 @@ document.addEventListener('DOMContentLoaded', async function() {
   const winnerContent = document.getElementById('winner-content');
   const noPrizeContent = document.getElementById('no-prize-content');
   
-  // Verificar si el dispositivo ya ha participado
+  // Ya no verificamos participación previa - se permite participar múltiples veces
+  // Este bloque se mantiene comentado para referencia
+  /*
   try {
     const { hasParticipated } = await checkDeviceParticipation();
     
     if (hasParticipated) {
-      // Si ya ha participado, mostrar la tarjeta correspondiente
       hideAllCards();
       alreadyParticipatedCard.classList.remove('d-none');
     }
   } catch (error) {
     console.error('Error al verificar la participación:', error);
   }
+  */
   
   // Evento para el botón de inicio
   startBtn.addEventListener('click', function() {

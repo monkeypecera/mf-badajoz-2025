@@ -63,15 +63,14 @@ function getDeviceId() {
 }
 
 // Función para verificar si el dispositivo ya ha participado
+// Modificada para siempre devolver hasParticipated: false y permitir múltiples participaciones
 async function checkDeviceParticipation() {
   try {
     const deviceId = getDeviceId();
-    const response = await fetch(`/api/participants/check/${deviceId}`);
-    const data = await response.json();
-    
+    // Ya no verificamos en el servidor, siempre permitimos participar
     return {
-      hasParticipated: data.hasParticipated,
-      participant: data.data
+      hasParticipated: false,
+      participant: null
     };
   } catch (error) {
     console.error('Error al verificar la participación del dispositivo:', error);
