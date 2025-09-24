@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo - Autenticación Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .demo-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .demo-title {
+      color: #ff6b00;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .demo-section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+    }
+    .demo-section h3 {
+      color: #333;
+      margin-top: 0;
+    }
+    .password-info {
+      background-color: #e8f5e8;
+      padding: 15px;
+      border-radius: 5px;
+      border-left: 4px solid #28a745;
+    }
+    .email-info {
+      background-color: #fff3cd;
+      padding: 15px;
+      border-radius: 5px;
+      border-left: 4px solid #ffc107;
+    }
+    .btn {
+      background-color: #ff6b00;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin: 5px;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
+    .code {
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      border: 1px solid #e9ecef;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <h1 class="demo-title">🔐 Demostración - Sistema de Autenticación Admin</h1>
+    
+    <div class="demo-section">
+      <h3>✅ Problema Solucionado: Autenticación Admin</h3>
+      <div class="password-info">
+        <strong>Contraseña configurada:</strong> <code>Pecera@2025!</code>
+        <br><br>
+        <strong>Cambios realizados:</strong>
+        <ul>
+          <li>✅ Modal de login agregado a admin.html</li>
+          <li>✅ Validación de contraseña en frontend</li>
+          <li>✅ Sesión persistente durante la navegación</li>
+          <li>✅ Botón de cerrar sesión</li>
+          <li>✅ Middleware de backend actualizado</li>
+          <li>✅ Variables de entorno configuradas</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h3>📧 Problema Identificado: Configuración de Email</h3>
+      <div class="email-info">
+        <strong>Posibles causas del error de email:</strong>
+        <ul>
+          <li>❌ Variables de entorno no configuradas</li>
+          <li>❌ Contraseña de aplicación no generada (Gmail)</li>
+          <li>❌ Configuración SMTP incorrecta</li>
+          <li>❌ Firewall bloqueando puerto 587</li>
+        </ul>
+        <br>
+        <strong>Solución creada:</strong> Archivo <code>SOLUCION_PROBLEMAS_EMAIL.md</code> con guía completa
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h3>🔧 Configuración Requerida</h3>
+      <p><strong>Para que el sistema funcione completamente, necesitas:</strong></p>
+      
+      <h4>1. Instalar Node.js y dependencias:</h4>
+      <div class="code">
+        # Instalar Node.js desde https://nodejs.org<br>
+        npm install<br>
+        npm start
+      </div>
+      
+      <h4>2. Configurar variables de entorno (.env):</h4>
+      <div class="code">
+        EMAIL_HOST=smtp.gmail.com<br>
+        EMAIL_PORT=587<br>
+        EMAIL_USER=tu_email@gmail.com<br>
+        EMAIL_PASS=tu_contraseña_de_aplicacion<br>
+        ADMIN_PASSWORD=Pecera@2025!<br>
+        MONGODB_URI=mongodb://localhost:27017/monkey_food_promo
+      </div>
+      
+      <h4>3. Para Gmail, generar contraseña de aplicación:</h4>
+      <div class="code">
+        1. Activar verificación en 2 pasos<br>
+        2. Google Account → Seguridad → Contraseñas de aplicaciones<br>
+        3. Generar nueva contraseña para "Correo"<br>
+        4. Usar esa contraseña en EMAIL_PASS
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h3>🎯 Funcionalidades Implementadas</h3>
+      <ul>
+        <li><strong>Autenticación segura:</strong> Modal de login con contraseña</li>
+        <li><strong>Sesión persistente:</strong> No pide contraseña en cada recarga</li>
+        <li><strong>Cerrar sesión:</strong> Botón para salir del panel</li>
+        <li><strong>Validación frontend:</strong> Verificación inmediata de contraseña</li>
+        <li><strong>Seguridad backend:</strong> Middleware de autenticación HTTP Basic</li>
+        <li><strong>Documentación:</strong> Guía completa para solucionar problemas de email</li>
+      </ul>
+    </div>
+
+    <div class="demo-section">
+      <h3>📁 Archivos Modificados/Creados</h3>
+      <ul>
+        <li><code>public/admin.html</code> - Sistema de autenticación agregado</li>
+        <li><code>server/middleware/adminAuth.js</code> - Contraseña actualizada</li>
+        <li><code>.env.example</code> - Contraseña por defecto actualizada</li>
+        <li><code>SOLUCION_PROBLEMAS_EMAIL.md</code> - Guía de troubleshooting</li>
+        <li><code>DEMO_ADMIN_AUTH.html</code> - Esta demostración</li>
+      </ul>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="admin.html" class="btn">🔗 Ir al Panel de Admin</a>
+      <a href="SOLUCION_PROBLEMAS_EMAIL.md" class="btn">📧 Ver Guía de Email</a>
+    </div>
+  </div>
+</body>
+</html>

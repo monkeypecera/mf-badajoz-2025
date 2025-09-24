@@ -21,7 +21,7 @@ exports.addDeviceId = (req, res, next) => {
   }
 };
 
-// Middleware para verificar si un dispositivo ya ha participado (desactivado)
+// Middleware para verificar si un dispositivo ya ha participado
 exports.checkParticipation = async (req, res, next) => {
   try {
     // Obtener el ID del dispositivo del cuerpo de la solicitud o generar uno nuevo
@@ -30,20 +30,38 @@ exports.checkParticipation = async (req, res, next) => {
     // Asegurar que el deviceId esté disponible en la solicitud
     req.deviceId = deviceId;
     
-    // Ya no verificamos si el dispositivo ha participado
-    // Establecemos valores por defecto para mantener compatibilidad
-    req.hasParticipated = false;
-    req.participant = null;
+    // Verificar si el dispositivo ya ha participado
+    const existingParticipant = await Participant.findOne({ deviceId });
+    
+    // Añadir la información a la solicitud
+    req.hasParticipated = !!existingParticipant;
+    req.participant = existingParticipant;
     
     next();
   } catch (error) {
-    console.error('Error al procesar el ID del dispositivo:', error);
+    console.error('Error al verificar la participación del dispositivo:', error);
     next();
   }
 };
 
-// Middleware para limitar la participación a un dispositivo (desactivado)
+// Middleware para limitar la participación a un dispositivo
 exports.limitParticipation = async (req, res, next) => {
-  // Permitimos todas las participaciones sin restricciones
-  next();
+  try {
+    // Si el dispositivo ya ha participado, devolver un error
+    if (req.hasParticipated) {
+      return res.status(400).json({
+        success: false,
+        error: 'Ya has participado desde este dispositivo',
+        participant: {
+          name: req.participant.name,
+          hasWon: req.participant.hasWon
+        }
+      });
+    }
+    
+    next();
+  } catch (error) {
+    console.error('Error al limitar la participación del dispositivo:', error);
+    next();
+  }
 };

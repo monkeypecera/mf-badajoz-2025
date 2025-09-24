@@ -1,0 +1,38 @@
+{
+  "name": "monkey-food-competition",
+  "version": "1.0.0",
+  "description": "Monkey Food Competition - Interactive prize wheel game for Monkey Food Badajoz",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "deploy": "./deploy.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "promocion",
+    "sorteo",
+    "monkey-food",
+    "badajoz"
+  ],
+  "author": "Monkey Food",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "mongoose": "^7.5.0",
+    "nodemailer": "^6.9.4",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

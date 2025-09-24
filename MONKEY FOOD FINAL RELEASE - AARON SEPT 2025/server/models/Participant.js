@@ -21,7 +21,8 @@ const ParticipantSchema = new mongoose.Schema({
   },
   deviceId: {
     type: String,
-    required: [true, 'El ID del dispositivo es obligatorio']
+    required: [true, 'El ID del dispositivo es obligatorio'],
+    index: true
   },
   prize: {
     type: mongoose.Schema.Types.ObjectId,
@@ -42,6 +43,7 @@ const ParticipantSchema = new mongoose.Schema({
   }
 });
 
-// Se ha eliminado el índice único para permitir múltiples participaciones
+// Índice compuesto para evitar participaciones duplicadas por dispositivo
+ParticipantSchema.index({ deviceId: 1 }, { unique: true });
 
 module.exports = mongoose.model('Participant', ParticipantSchema);

@@ -33,10 +33,10 @@ const nodemailer = require('nodemailer');
 exports.registerParticipant = async (req, res) => {
   try {
     const { name, email, phone } = req.body;
-    // Usar el deviceId del middleware (ya no se valida participación previa)
+    // Usar el deviceId que fue validado en el middleware
     const deviceId = req.deviceId;
 
-    // Se permite participar múltiples veces desde el mismo dispositivo
+    // La verificación de participación previa ya se realiza en el middleware
 
     // Obtener un premio aleatorio
     const prize = await getRandomPrize();
